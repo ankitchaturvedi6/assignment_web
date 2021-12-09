@@ -42,9 +42,9 @@
 
                 <div class="text-grey-dark mt-6">
                     Already have an account? 
-                    <a class="no-underline border-b border-blue text-blue" href="../login/">
+                    <a class="no-underline border-b border-blue text-blue" href="login">
                         Log in
-                    </a>.
+                    </a>
                 </div>
             </div>
         </div>
