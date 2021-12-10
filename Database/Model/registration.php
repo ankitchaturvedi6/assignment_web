@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__).'/../Database/connection.php';
+include dirname(__FILE__).'/../connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Something posted

@@ -2,7 +2,8 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "bigstep";
+// $password = "bigstep";
+$password = "Bigstep@123";
 $dbname = "assingment";
 
 // Create connection
