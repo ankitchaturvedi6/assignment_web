@@ -117,15 +117,14 @@ include dirname(__FILE__).'/../Database/Model/registration.php';
         const mobile = document.getElementById('mobile').value;
         const pass = passEl.value;
         const cnfPass = document.getElementById('confirm-password').value;
-        console.log(mobile, pass, cnfPass);
         const pattern = new RegExp(
           "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
         );
-        return (
+        return !(
             pass !== cnfPass ||
             !(pattern.test(pass)) ||
             mobile.length !== 10
-        )
+        );
     }
 
 
