@@ -1,4 +1,15 @@
-<?php    
+<?php  
+session_start();
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
+    session_unset();     // unset $_SESSION variable for the run-time 
+    session_destroy();
+}
+else{
+    $_SESSION['LAST_ACTIVITY'] = time();
+}
+if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
+    header('Location: login');
+}  
 ?>
 
 <!doctype html>

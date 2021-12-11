@@ -1,4 +1,5 @@
 <?php
+session_start();
 include dirname(__FILE__) . '/../connection.php';
 $email_error       = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,7 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $sqlquery = "INSERT INTO users VALUES(null,'$firstname', '$lastname', '$mobile', '$email', '$hashed_password')";
                 if ($conn->query($sqlquery) === TRUE) {
-                    header('Location: login');
+                    $sql = "SELECT * from users WHERE email = '$email'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $_SESSION['id']    =$row['user_id'];
+                    $_SESSION['email'] =$row['email'];
+                    $_SESSION['LAST_ACTIVITY'] = time();
+                    header('Location: home');
                 }
             }
         }

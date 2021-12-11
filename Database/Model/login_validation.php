@@ -1,4 +1,5 @@
 <?php
+session_start();
 include dirname(__FILE__) . '/../connection.php';
 
 $email_error       = '';
@@ -14,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = mysqli_fetch_assoc($result);
             $hash_pass = $row["password"];
             if (password_verify($password, $hash_pass)) {
+                    $_SESSION['id']    =$row['user_id'];
+                    $_SESSION['email'] =$row['email'];
+                    $_SESSION['LAST_ACTIVITY'] = time();
                 header('Location: home');
             } else {
                 $email_error = "Sorry... email or password is incorrect";
