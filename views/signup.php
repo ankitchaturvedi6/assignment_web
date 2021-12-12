@@ -21,11 +21,18 @@ include dirname(__FILE__).'/../Database/Model/registration.php';
       </h2>
       <p class="mt-2 text-center text-sm text-gray-600">
         Or
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+        <a href="login" class="font-medium text-indigo-600 hover:text-indigo-500">
           Sign in
         </a>
       </p>
     </div>
+    <?php
+    if($email_error){
+      echo "<div>
+      $email_error
+      </div>";
+    }
+    ?>
     <form class="mt-8 space-y-6 singup-form" action="#" method="POST" onsubmit="return formValidation()" >
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
@@ -76,7 +83,7 @@ include dirname(__FILE__).'/../Database/Model/registration.php';
         </div>
       </div>
       <div>
-        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" disabled>
+        <button type="submit" name = "registration" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             <!-- Heroicon name: solid/lock-closed -->
             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

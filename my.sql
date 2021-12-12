@@ -8,3 +8,13 @@ CREATE TABLE `users` (
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`)
 );
+
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL auto_increment,
+  `details` varchar(128) NOT NULL,
+  `contact_type` tinyint NOT NULL,
+  `image` varchar(256) NOT NULL,
+  `status` tinyint NOT NULL,
+  PRIMARY KEY (`product_id`)
+);

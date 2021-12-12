@@ -1,3 +1,7 @@
+<?php   
+include dirname(__FILE__).'/../Database/Model/login_validation.php';
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +25,14 @@
         </a>
       </p>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <?php
+    if($email_error){
+      echo "<div>
+      $email_error
+      </div>";
+    }
+    ?>
+    <form class="mt-8 space-y-6" action="" method="POST">
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="my-2">
@@ -50,7 +61,7 @@
       </div>
 
       <div>
-        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button type="submit" name="login" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             <!-- Heroicon name: solid/lock-closed -->
             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
