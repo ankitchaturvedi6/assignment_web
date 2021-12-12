@@ -19,8 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         else{
             if (move_uploaded_file($_FILES["object_img"]["tmp_name"], $target_file)) {
                 $user_id=$_SESSION['id'];
-                $file_name= $uniquesavename=time().uniqid(rand()).$_FILES["object_img"]["name"];
-                $sqlquery = "INSERT INTO products VALUES(null,'$user_id', '$object_details', '$contact_method', '$file_name', 0)";
+                $file_name= $uniquesavename;
+
+                $sqlquery = "INSERT INTO products VALUES(null,'$user_id', '$object_details', '$contact_method', '$file_name', 2)";
                 if ($conn->query($sqlquery) === TRUE) {
                 $msg = "The file ". htmlspecialchars( basename( $_FILES["object_img"]["name"])). " has been uploaded.";
                 }else{

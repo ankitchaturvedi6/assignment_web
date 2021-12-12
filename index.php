@@ -19,6 +19,12 @@ switch($request) {
         break;
     case "/admin":
         require __DIR__ . '/views/admin.php';
+        break;
+    case "/status_update":
+        require __DIR__ . '/Database/Model/status_update.php';
+        break; 
+    case "/profile":
+        require __DIR__ . '/views/profile.php';
         break;        
     default:
         http_response_code(404);

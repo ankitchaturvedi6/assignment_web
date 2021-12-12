@@ -45,7 +45,7 @@ include dirname(__FILE__).'/../Database/Model/upload_object.php';
           echo $msg;
           ?>
       </div>
-      <form class="mt-8 space-y-6 singup-form" action="" method="POST" enctype="multipart/form-data" onsubmit="return formValidation()" >
+      <form class="mt-8 space-y-6 singup-form" action="" method="POST" enctype="multipart/form-data" >
           <input type="hidden" name="remember" value="true">
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
@@ -57,6 +57,7 @@ include dirname(__FILE__).'/../Database/Model/upload_object.php';
                     class="form-textarea mt-1 block w-full p-2"
                     rows="3"
                     placeholder="Enter details of object."
+                    required
                     ></textarea>
                 </label>
             </div> 
@@ -89,18 +90,15 @@ include dirname(__FILE__).'/../Database/Model/upload_object.php';
                                        Select a photo
                                    </p>
                                </div>
-                               <input type="file" class="opacity-0" name="object_img" id="object_img" accept="image/*"/>
+                               <input type="file" class="opacity-0" name="object_img" id="object_img" accept="image/*" required />
                            </label>
                        </div>
                    </div>
 
                </div>
-               <div>
 
-                   <div class="relative">
-                      <img src="#" class="image w-42 h-42" id="selected_image" style="display: none;">
-                      <button class="absolute left-0">remove</button>
-                  </div>
+               <div class="rounded-lg shadow-xl bg-gray-50 ml-2 selected-image-block" style="display:none">
+                      <img src="#" class="image" id="selected_image" style="display: block;">
               </div>
           </div>
 
@@ -129,21 +127,15 @@ include dirname(__FILE__).'/../Database/Model/upload_object.php';
 
 <script type="text/javascript">
 
-    function formValidation() {
-        const details = document.getElementById('details').value;
-        const image = document.getElementById('image');
-        console.log(image.files[0], URL.createObjectURL(image.files[0]));
-        return false;
-    }
 
-    document.getElementById('image').addEventListener('change', function(event) {
+    document.getElementById('object_img').addEventListener('change', function(event) {
         // console.log(URL.createObjectURL(event.target.files[0]));
         const path = URL.createObjectURL(event.target.files[0])
 
         const selImgEl = document.getElementById('selected_image');
         selImgEl.src = path;
         selImgEl.style.display = 'block';
-        document.getElementById('image_selector').style.display = 'none';
+        document.querySelector('.selected-image-block').style.display = 'block';
     })
 </script>
 

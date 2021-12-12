@@ -17,6 +17,10 @@ CREATE TABLE `products` (
   `details` varchar(128) NOT NULL,
   `contact_type` tinyint NOT NULL,
   `image` varchar(256) NOT NULL,
-  `status` tinyint NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '2',
   PRIMARY KEY (`product_id`)
 );
+
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `mobile`, `email`, `password`, `level_id`) VALUES
+(1, 'admin', 'server', '1234567880', 'admin@gmail.com', '$2y$10$vc9qI1f4u1l945j9voD1Veetgu9jDx4ngFjtbyKqaWN7jPUh1JXYO', 1);
+
