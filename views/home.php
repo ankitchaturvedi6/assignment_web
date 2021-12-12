@@ -10,6 +10,7 @@ else{
 if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
     header('Location: login');
 }  
+include dirname(__FILE__).'/../Database/Model/upload_object.php';
 ?>
 
 <!doctype html>
@@ -29,13 +30,18 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
                 Create Request 
             </h2>
       </div>
-      <form class="mt-8 space-y-6 singup-form" action="#" method="POST" onsubmit="return formValidation()" >
+      <div>
+          <?php
+          echo $msg;
+          ?>
+      </div>
+      <form class="mt-8 space-y-6 singup-form" action="" method="POST" enctype="multipart/form-data" onsubmit="return formValidation()" >
           <input type="hidden" name="remember" value="true">
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
                 <label class="block text-left">
                     <span class="text-gray-700">Details of Object</span>
-                    <textarea
+                    <textarea name="object_details"
                     class="form-textarea mt-1 block w-full p-2"
                     rows="3"
                     placeholder="Enter details of object."
@@ -45,9 +51,9 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
             <div>
                 <label class="block text-left my-2" style="max-width: 400px">
                     <span class="text-gray-700">Contact Method</span>
-                    <select name="contact_method" id="contact_method" class="form-select block w-full mt-1 p-2 bg-white">
-                        <option value="mobile" selected>Phone</option>
-                        <option value="email">Email</option>
+                    <select name="contact_method" name="contact_method" id="contact_method" class="form-select block w-full mt-1 p-2 bg-white">
+                        <option value="1" selected>Phone</option>
+                        <option value="2">Email</option>
                     </select>
                 </label>
             </div> 
@@ -70,7 +76,7 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
                                     <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                     Select a photo</p>
                                 </div>
-                                <input type="file" class="opacity-0" />
+                                <input type="file" name='object_img' class="opacity-0" />
                             </label>
                         </div>
                     </div>
@@ -81,7 +87,7 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
         </div>
     </div>
     <div>
-        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button type="submit" name="object_upload" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             <!-- Heroicon name: solid/lock-closed -->
             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
