@@ -1,4 +1,9 @@
 <?php  
+if(isset($_POST['logout'])) {
+    session_unset(); 
+    session_destroy(); 
+    header('Location: login');  
+}
 session_start();
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
     session_unset();     // unset $_SESSION variable for the run-time 
@@ -7,9 +12,11 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 else{
     $_SESSION['LAST_ACTIVITY'] = time();
 }
+
 if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
     header('Location: login');
 }  
+include dirname(__FILE__).'/../Database/Model/upload_object.php';
 ?>
 
 <!doctype html>
@@ -20,7 +27,10 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://unpkg.com/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
     </head>
-    <body  style="background: #edf2f7;">
+    <body style="background: #edf2f7;">
+        <header class="bg-indigo-400">
+            <?php include dirname(__FILE__).'/nav_header.php'; ?>
+        </header>
         <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div class="max-w-2xl w-full space-y-8">
             <div>
@@ -28,14 +38,21 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
               <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                 Create Request 
             </h2>
-        </div>
-        <form class="mt-8 space-y-6 singup-form" action="#" method="POST" onsubmit="return formValidation()" >
+
+      </div>
+      <div>
+          <?php
+          echo $msg;
+          ?>
+      </div>
+      <form class="mt-8 space-y-6 singup-form" action="" method="POST" enctype="multipart/form-data" onsubmit="return formValidation()" >
           <input type="hidden" name="remember" value="true">
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
                 <label class="block text-left">
                     <span class="text-gray-700">Details of Object</span>
                     <textarea
+                    name="object_details"
                     id="details"
                     class="form-textarea mt-1 block w-full p-2"
                     rows="3"
@@ -46,9 +63,9 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
             <div>
                 <label class="block text-left my-2" style="max-width: 400px">
                     <span class="text-gray-700">Contact Method</span>
-                    <select name="contact_method" id="contact_method" class="form-select block w-full mt-1 p-2 bg-white">
-                        <option value="mobile" selected>Phone</option>
-                        <option value="email">Email</option>
+                    <select name="contact_method" name="contact_method" id="contact_method" class="form-select block w-full mt-1 p-2 bg-white">
+                        <option value="1" selected>Phone</option>
+                        <option value="2">Email</option>
                     </select>
                 </label>
             </div> 
@@ -72,7 +89,7 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
                                        Select a photo
                                    </p>
                                </div>
-                               <input type="file" class="opacity-0" name="image" id="image" accept="image/*"/>
+                               <input type="file" class="opacity-0" name="object_img" id="object_img" accept="image/*"/>
                            </label>
                        </div>
                    </div>
@@ -90,7 +107,7 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
       </div>
   </div>
   <div>
-    <button type="submit" id="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    <button type="submit" name="object_upload" value="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
       <span class="absolute left-0 inset-y-0 flex items-center pl-3">
         <!-- Heroicon name: solid/lock-closed -->
         <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -99,6 +116,7 @@ if(!(isset($_SESSION['id']) and isset($_SESSION['email']))){
   </span>
   Submit
 </button>
+
 </div>
 </form>
 </div>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 include dirname(__FILE__) . '/../connection.php';
-
 $email_error       = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -17,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($password, $hash_pass)) {
                     $_SESSION['id']    =$row['user_id'];
                     $_SESSION['email'] =$row['email'];
+                    $_SESSION['level_id'] =$row['level_id'];
                     $_SESSION['LAST_ACTIVITY'] = time();
                 header('Location: home');
             } else {
@@ -27,4 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email_error = "Sorry... email or password is incorrect";
         }
     }
+} else {
+    session_destroy();
 }
